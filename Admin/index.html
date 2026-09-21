@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Pick n Drive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Public/css/style.css"> <!-- Base styles -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="bg-light">
+
+    <!-- Auth Section -->
+    <section id="auth-section" class="auth-container">
+        <div class="auth-card">
+            <h2 class="text-navy mb-4">Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary w-100" id="login-btn">Log In</button>
+                <div id="auth-error" class="text-danger mt-2" style="display: none;"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard-section" style="display: none;">
+        <header class="header">
+            <nav class="nav container">
+                <a href="#" class="logo">Pick n Drive Admin</a>
+                <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                    <span class="sr-only">Menu</span>
+                    <div class="hamburger"></div>
+                </button>
+                <ul id="primary-navigation" class="nav-links">
+                    <li><a href="#" id="tab-content" class="active-tab" style="font-weight: bold;">Site Content</a></li>
+                    <li><a href="#" id="tab-vehicles">Vehicles</a></li>
+                    <li><a href="#" id="tab-gallery">Gallery Images</a></li>
+                </ul>
+                <button id="logout-btn" class="btn btn-secondary nav-cta" style="border: none; cursor: pointer; padding: 0.75rem 1.5rem; font-weight: 600;">Log Out</button>
+            </nav>
+        </header>
+
+        <main class="container admin-main mt-4">
+            
+            <!-- Site Content Panel -->
+            <div id="panel-content" class="admin-panel">
+                <div class="admin-toolbar flex-between mb-4">
+                    <h2 class="text-navy">Manage Site Content</h2>
+                </div>
+                <div class="vehicles-table-container">
+                    <table class="vehicles-table w-100">
+                        <thead>
+                            <tr>
+                                <th>Section</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Vehicles Panel -->
+            <div id="panel-vehicles" class="admin-panel" style="display: none;">
+                <div class="admin-toolbar flex-between mb-4">
+                    <h2 class="text-navy">Manage Vehicles</h2>
+                    <button id="add-vehicle-btn" class="btn btn-primary">Add New Vehicle</button>
+                </div>
+                <div class="vehicles-table-container">
+                    <table class="vehicles-table w-100">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Make & Model</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vehicles-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gallery Images Panel -->
+            <div id="panel-gallery" class="admin-panel" style="display: none;">
+                <div class="admin-toolbar flex-between mb-4">
+                    <h2 class="text-navy">Manage Gallery Images</h2>
+                    <button id="add-image-btn" class="btn btn-primary">Add New Image</button>
+                </div>
+                <div class="vehicles-table-container">
+                    <table class="vehicles-table w-100">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Vehicle</th>
+                                <th>Order</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gallery-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </section>
+
+    <!-- Modal for Edit Site Content -->
+    <div id="content-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal content-close">&times;</span>
+            <h2 class="mb-4">Edit Content (<span id="content-section-display"></span>)</h2>
+            <form id="content-form">
+                <input type="hidden" id="content-section-key">
+                <div class="form-group mb-2">
+                    <label for="content-title">Title</label>
+                    <input type="text" id="content-title" class="form-control" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="content-description">Description</label>
+                    <textarea id="content-description" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="form-actions mt-4 flex-row gap-md">
+                    <button type="submit" class="btn btn-primary" id="save-content-btn">Save Content</button>
+                    <button type="button" class="btn btn-secondary content-close">Cancel</button>
+                    <div id="content-form-status" class="mt-2 text-danger"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Gallery Image -->
+    <div id="gallery-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal gallery-close">&times;</span>
+            <h2 id="gallery-modal-title" class="mb-4">Add Gallery Image</h2>
+            
+            <form id="gallery-form">
+                <input type="hidden" id="gallery-id">
+                
+                <div class="form-group mb-2">
+                    <label for="gallery-upload">Upload Image (Required for new)</label>
+                    <input type="file" id="gallery-upload" accept="image/*">
+                    <div id="gallery-preview-container" class="mt-2"></div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="gallery-vehicle">Select Vehicle</label>
+                    <select id="gallery-vehicle" class="form-control" required>
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+
+                <div class="form-row flex-row gap-md mb-2">
+                    <div class="form-group flex-1">
+                        <label for="gallery-title">Title</label>
+                        <input type="text" id="gallery-title" class="form-control" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label for="gallery-order">Display Order</label>
+                        <input type="number" id="gallery-order" class="form-control" value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="gallery-description">Description</label>
+                    <textarea id="gallery-description" class="form-control" rows="2"></textarea>
+                </div>
+                
+                <div class="form-group mb-2">
+                    <label for="gallery-alt">Alt Text (Required for SEO)</label>
+                    <input type="text" id="gallery-alt" class="form-control" required>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label class="flex-row" style="align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="gallery-active" checked style="width: auto;">
+                        Is Active?
+                    </label>
+                </div>
+
+                <div class="form-actions mt-4 flex-row gap-md">
+                    <button type="submit" class="btn btn-primary" id="save-gallery-btn">Save Image</button>
+                    <button type="button" class="btn btn-secondary gallery-close">Cancel</button>
+                    <div id="gallery-form-status" class="mt-2 text-danger"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Vehicle -->
+    <div id="vehicle-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal vehicle-close">&times;</span>
+            <h2 id="vehicle-modal-title" class="mb-4">Add Vehicle</h2>
+            
+            <form id="vehicle-form">
+                <input type="hidden" id="vehicle-id">
+                
+                <div class="form-row flex-row gap-md mb-2">
+                    <div class="form-group flex-1">
+                        <label for="vehicle-make">Make</label>
+                        <input type="text" id="vehicle-make" class="form-control" required placeholder="e.g. Suzuki">
+                    </div>
+                    <div class="form-group flex-1">
+                        <label for="vehicle-model">Model</label>
+                        <input type="text" id="vehicle-model" class="form-control" required placeholder="e.g. Wagon R">
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="vehicle-description">Description</label>
+                    <textarea id="vehicle-description" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div class="form-row flex-row gap-md mb-2">
+                    <div class="form-group flex-1">
+                        <label for="vehicle-order">Display Order</label>
+                        <input type="number" id="vehicle-order" class="form-control" value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label class="flex-row" style="align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="vehicle-active" checked style="width: auto;">
+                        Is Active?
+                    </label>
+                </div>
+
+                <div class="form-actions mt-4 flex-row gap-md">
+                    <button type="submit" class="btn btn-primary" id="save-vehicle-btn">Save Vehicle</button>
+                    <button type="button" class="btn btn-secondary vehicle-close">Cancel</button>
+                    <div id="vehicle-form-status" class="mt-2 text-danger"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- App Logic -->
+    <script src="js/admin.js"></script>
+</body>
+</html>
