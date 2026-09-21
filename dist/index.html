@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental in Colombo | Pick n Drive</title>
+    <meta name="description"
+        content="Reliable car rental in Colombo with a well-maintained fleet of vehicles including the Suzuki Wagon R and Toyota Aqua. Contact Pick n Drive to check availability and rental details.">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Car Rental in Colombo | Pick n Drive">
+    <meta property="og:description"
+        content="Reliable car rental in Colombo with a well-maintained fleet of vehicles including the Suzuki Wagon R and Toyota Aqua. Contact Pick n Drive to check availability and rental details.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pickndrive.lk/">
+    <meta property="og:image" content="https://pickndrive.lk/assets/vehicle/suzuki-wagon-r-colombo-front.jpg">
+
+    <!-- Twitter Metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRental",
+      "name": "Pick n Drive - Rent a Car",
+      "image": "https://pickndrive.lk/assets/vehicle/suzuki-wagon-r-colombo-front.jpg",
+      "url": "https://pickndrive.lk/",
+      "telephone": "+94771234567",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Colombo",
+        "addressCountry": "LK"
+      },
+      "areaServed": "Colombo"
+    }
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo" id="nav-brand">Pick n Drive</a>
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                <div class="hamburger"></div>
+            </button>
+            <ul id="primary-navigation" class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#vehicle">Vehicles</a></li>
+                <li><a href="#how-it-works">Booking</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Contact Us</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <a href="#" class="btn btn-primary nav-cta dynamic-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-titles">
+                        <p id="content-hero-desc">Your Journey, Our Ride</p>
+                        <h1 id="content-hero-title">Reliable Cars for every <span style="color: var(--clr-blue)">Drive</span></h1>
+                    </div>
+                    
+                    <div class="hero-trust">
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="var(--clr-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                            </svg>
+                            <span>Convenient Communication</span>
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="var(--clr-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                            <span>Well-Maintained</span>
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="var(--clr-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                                <line x1="16" x2="16" y1="2" y2="6" />
+                                <line x1="8" x2="8" y1="2" y2="6" />
+                                <line x1="3" x2="21" y1="10" y2="10" />
+                                <path d="m9 16 2 2 4-4" />
+                            </svg>
+                            <span>Easy Booking</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#" class="btn btn-primary dynamic-whatsapp" target="_blank" rel="noopener">WhatsApp
+                            Us</a>
+                        <a href="#" class="btn btn-secondary dynamic-phone">Call Now</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/vehicle/herobg.png" alt="Suzuki Wagon R available for rent in Colombo" width="800"
+                        height="450" id="hero-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicle Showcase Section -->
+        <section id="vehicle" class="vehicle-showcase">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Vehicles</h2>
+                    <p>Perfect for city driving and weekend trips.</p>
+                </div>
+                <div id="vehicle-loading" style="text-align: center; padding: 2rem;">
+                    <p>Loading vehicles...</p>
+                </div>
+                <div id="vehicle-error" style="display: none; text-align: center; padding: 2rem;">
+                    <p>Vehicles currently unavailable. Please contact us to check our fleet.</p>
+                </div>
+                <div id="vehicle-content" style="display: none;">
+                    <div class="vehicle-tabs-container">
+                        <div class="vehicle-tabs" id="vehicle-tabs">
+                            <!-- Rendered via JS -->
+                        </div>
+                    </div>
+                    <div class="vehicle-card">
+                        <div class="vehicle-gallery" id="vehicle-gallery-container">
+                            <!-- Rendered via JS -->
+                        </div>
+                        <div class="vehicle-details">
+                            <h3 id="content-vehicle-title">Suzuki Wagon R</h3>
+                            <p id="content-vehicle-desc">Loading details...</p>
+                            <a href="#" class="btn btn-primary dynamic-whatsapp btn-large" target="_blank"
+                                rel="noopener">Check Availability on WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="content-how_it_works-title">How It Works</h2>
+                    <p id="content-how_it_works-desc">Simple and fast rental process.</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Contact Us</h3>
+                        <p>Reach out via WhatsApp or phone call.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Confirm Availability</h3>
+                        <p>We'll quickly let you know if the vehicle is available for your dates.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Arrange Rental</h3>
+                        <p>Finalize the details and pick up the car.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container about-container">
+                <div class="about-content">
+                    <h2 id="content-about-title">About Pick n Drive</h2>
+                    <p id="content-about-desc">Pick n Drive provides premium, affordable car rentals in Colombo and suburbs. From compact cars
+                        for everyday driving to spacious vehicles for family trips, we offer flexible rental options
+                        with straightforward pricing. Experience top-tier customer service and hit the road with
+                        confidence. Contact us to reserve your vehicle today!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="location bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="content-location-title">Our Location</h2>
+                    <p id="content-location-desc">Serving the Colombo area.</p>
+                </div>
+                <div class="location-card"
+                    style="display: flex; flex-direction: column; gap: var(--space-md); overflow: hidden;">
+                    <div class="location-info">
+                        <h3>Colombo, Sri Lanka</h3>
+                        <p>Find us on Google for directions and reviews.</p>
+                    </div>
+                    <div class="location-map" style="width: 100%; height: 300px;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4710.903931731805!2d79.91584225653615!3d6.8446981469131245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x467b724ef4a3d3f%3A0x7f104774324568c9!2sPick%20n%20Drive%20-%20Rent%20a%20Car!5e0!3m2!1sen!2slk!4v1789972767291!5m2!1sen!2slk"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="content-faq-title">Frequently Asked Questions</h2>
+                    <p id="content-faq-desc"></p>
+                </div>
+                <div class="faq-container" id="faq-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta bg-primary">
+            <div class="container final-cta-container">
+                <h2 id="content-final_cta-title">Need a car in Colombo?</h2>
+                <p id="content-final_cta-desc">Contact us to check availability and book your ride today.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn btn-white dynamic-whatsapp" target="_blank" rel="noopener">WhatsApp Us</a>
+                    <a href="#" class="btn btn-outline-white dynamic-phone">Call Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h3 id="footer-brand-name">Pick n Drive</h3>
+                <p>Reliable Car Rental in Colombo.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#" class="dynamic-whatsapp" target="_blank" rel="noopener">WhatsApp</a></li>
+                    <li><a href="#" class="dynamic-phone">Phone</a></li>
+                    <li><a href="#" class="dynamic-gmap" target="_blank" rel="noopener">Google Business Profile</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; <span id="current-year"></span> <span id="footer-copyright-name">Pick n Drive</span>. All rights
+                reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js" integrity="sha384-wgi7s9Y2xefdDru3II6Xb11y/YNoKVbuydTikWejwId9z2xRd8SveCTrJjj/QAnH" crossorigin="anonymous"></script>
+    <script src="js/data.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

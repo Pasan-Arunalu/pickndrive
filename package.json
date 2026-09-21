@@ -1,0 +1,11 @@
+{
+  "name": "pickndrive",
+  "version": "1.0.0",
+  "description": "Pick n Drive website",
+  "scripts": {
+    "build": "shx rm -rf dist && shx mkdir -p dist/admin && shx cp -r Public/* dist/ && shx cp -r Admin/* dist/admin/ && shx cp _headers dist/"
+  },
+  "devDependencies": {
+    "shx": "^0.3.4"
+  }
+}
