@@ -25,21 +25,27 @@ async function fetchSiteContent() {
         const titleEl = document.getElementById(`content-${item.section_key}-title`);
         const descEl = document.getElementById(`content-${item.section_key}-desc`);
         
+        const escapeHTML = str => {
+            const p = document.createElement('p');
+            p.appendChild(document.createTextNode(str));
+            return p.innerHTML;
+        };
+        
         if (titleEl && item.title) {
             if (item.section_key === 'hero') {
                 const words = item.title.trim().split(' ');
                 if (words.length > 1) {
                     const lastWord = words.pop();
-                    titleEl.innerHTML = `${words.join(' ')} <span style="color: var(--clr-blue)">${lastWord}</span>`;
+                    titleEl.innerHTML = `${escapeHTML(words.join(' '))} <span style="color: var(--clr-blue)">${escapeHTML(lastWord)}</span>`;
                 } else {
-                    titleEl.innerHTML = item.title;
+                    titleEl.textContent = item.title;
                 }
             } else {
-                titleEl.innerHTML = item.title;
+                titleEl.textContent = item.title;
             }
         }
         if (descEl && item.description) {
-            descEl.innerHTML = item.description;
+            descEl.textContent = item.description;
         }
     });
 }

@@ -1,5 +1,12 @@
 // Admin Panel Logic for New Schema (site_content & gallery_images)
 
+const escapeHTML = str => {
+    if (str == null) return '';
+    const p = document.createElement('p');
+    p.appendChild(document.createTextNode(str));
+    return p.innerHTML;
+};
+
 const SUPABASE_URL = 'https://mvxpkoauxpmkatxclffd.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12eHBrb2F1eHBta2F0eGNsZmZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5NzkxOTgsImV4cCI6MjEwNTU1NTE5OH0.-IL7XTpbq_UIdTkSzwSyrxE3uneDyefRCC5gJhNwtd8';
 
@@ -159,10 +166,10 @@ async function loadSiteContent() {
     data.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><strong>${item.section_key}</strong></td>
-            <td>${item.title}</td>
-            <td><small>${item.description}</small></td>
-            <td><button class="btn btn-secondary action-btn edit-content-btn" data-key="${item.section_key}">Edit</button></td>
+            <td><strong>${escapeHTML(item.section_key)}</strong></td>
+            <td>${escapeHTML(item.title)}</td>
+            <td><small>${escapeHTML(item.description)}</small></td>
+            <td><button class="btn btn-secondary action-btn edit-content-btn" data-key="${escapeHTML(item.section_key)}">Edit</button></td>
         `;
         contentTbody.appendChild(tr);
     });
@@ -220,12 +227,12 @@ async function loadVehicles() {
     allVehicles.forEach(v => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${v.display_order}</td>
-            <td><strong>${v.make} ${v.model}</strong></td>
+            <td>${escapeHTML(v.display_order.toString())}</td>
+            <td><strong>${escapeHTML(v.make)} ${escapeHTML(v.model)}</strong></td>
             <td>${v.is_active ? '<span style="color:green;">Active</span>' : '<span style="color:red;">Hidden</span>'}</td>
             <td>
-                <button class="btn btn-secondary action-btn edit-vehicle-btn" data-id="${v.id}">Edit</button>
-                <button class="btn btn-primary action-btn delete-vehicle-btn" data-id="${v.id}">Delete</button>
+                <button class="btn btn-secondary action-btn edit-vehicle-btn" data-id="${escapeHTML(v.id)}">Edit</button>
+                <button class="btn btn-primary action-btn delete-vehicle-btn" data-id="${escapeHTML(v.id)}">Delete</button>
             </td>
         `;
         vehiclesTbody.appendChild(tr);
@@ -236,7 +243,7 @@ async function loadVehicles() {
     if (vehicleSelect) {
         vehicleSelect.innerHTML = '<option value="">-- Select a Vehicle --</option>';
         allVehicles.forEach(v => {
-            vehicleSelect.innerHTML += `<option value="${v.id}">${v.make} ${v.model}</option>`;
+            vehicleSelect.innerHTML += `<option value="${escapeHTML(v.id)}">${escapeHTML(v.make)} ${escapeHTML(v.model)}</option>`;
         });
     }
 
@@ -354,14 +361,14 @@ async function loadGalleryImages() {
         const vName = v ? `${v.make} ${v.model}` : 'Unassigned';
 
         tr.innerHTML = `
-            <td><img src="${imgUrl}" alt="${img.alt_text}" width="80" height="50"></td>
-            <td><small>${vName}</small></td>
-            <td>${img.display_order}</td>
-            <td><strong>${img.title}</strong></td>
+            <td><img src="${escapeHTML(imgUrl)}" alt="${escapeHTML(img.alt_text)}" width="80" height="50"></td>
+            <td><small>${escapeHTML(vName)}</small></td>
+            <td>${escapeHTML(img.display_order.toString())}</td>
+            <td><strong>${escapeHTML(img.title)}</strong></td>
             <td>${img.is_active ? '<span style="color:green;">Active</span>' : '<span style="color:red;">Hidden</span>'}</td>
             <td>
-                <button class="btn btn-secondary action-btn edit-gallery-btn" data-id="${img.id}">Edit</button>
-                <button class="btn btn-primary action-btn delete-gallery-btn" data-id="${img.id}">Delete</button>
+                <button class="btn btn-secondary action-btn edit-gallery-btn" data-id="${escapeHTML(img.id)}">Edit</button>
+                <button class="btn btn-primary action-btn delete-gallery-btn" data-id="${escapeHTML(img.id)}">Delete</button>
             </td>
         `;
         galleryTbody.appendChild(tr);
@@ -404,6 +411,15 @@ galleryForm.addEventListener('submit', async (e) => {
         // Upload new image if selected
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
+            
+            // Client-side security checks
+            if (!file.type.startsWith('image/')) {
+                throw new Error("Invalid file type. Only images are allowed.");
+            }
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                throw new Error("File is too large. Maximum size is 5MB.");
+            }
+
             const fileExt = file.name.split('.').pop();
             const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
             storage_path = `${fileName}`;
